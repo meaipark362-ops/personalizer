@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>결제 — Personalizer 요금제 선택</title>
+  <meta name="description" content="Personalizer 요금제를 선택하고 주문 내용을 확인하세요. Plus(월 9,000원) / Pro(월 12,000원). 현재 결제 연동 준비 중입니다.">
+  <meta name="theme-color" content="#050506">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/checkout.css">
+</head>
+
+<body class="co-body">
+  <a class="skip" href="#checkout">결제 내용으로 건너뛰기</a>
+
+  <header class="nav is-solid co-nav">
+    <div class="wrap nav__in">
+      <div class="nav__brand-group">
+        <a class="nav__brand p-mark" href="../" aria-label="Personalizer 제품 페이지로">PERSONALIZER</a>
+        <span class="nav__by-divider" aria-hidden="true"></span>
+        <span class="nav__by-mark" title="Crafted by 3BIT3BOARD" aria-label="Crafted by 3BIT3BOARD">
+          <img class="nav__by-img" src="../assets/wordmark-3bit3board.png" alt="3BIT3BOARD" width="130" height="18" loading="eager">
+        </span>
+      </div>
+      <a class="co-back" href="../#pricing" id="co-back"><span aria-hidden="true">←</span> 요금제 다시 보기</a>
+    </div>
+  </header>
+
+  <main id="checkout" class="co">
+    <div class="wrap">
+      <div class="co-banner" role="note">
+        <span class="badge badge--warn">결제 연동 준비 중</span>
+        <p>이 페이지에서는 요금제와 금액을 확인할 수 있으며, <strong>아직 실제 결제는 진행되지 않습니다.</strong> 요금이 청구되지 않습니다.</p>
+      </div>
+
+      <!-- 결제 오류 · 미완료 · 미연동 상태 안내 영역 -->
+      <div class="co-alert" id="coAlert" role="alert" aria-live="assertive" hidden></div>
+
+      <header class="co-head">
+        <p class="eyebrow">Checkout</p>
+        <h1 class="h2">요금제를 선택하세요.</h1>
+      </header>
+
+      <div class="co-grid">
+        <!-- ================= LEFT : plan + method ================= -->
+        <div class="co-main">
+          <form class="co-form" id="coForm" novalidate>
+            <fieldset class="co-step">
+              <legend class="co-step__title"><span class="mono">01</span>요금제 및 결제 주기 선택</legend>
+              
+              <!-- Billing cycle segmented toggle -->
+              <div class="co-cycle-toggle-wrap">
+                <div class="co-cycle-toggle" role="radiogroup" aria-label="결제 주기">
+                  <button type="button" class="co-cycle-btn is-active" id="btnCoMonthly" data-billing="monthly" aria-pressed="true">
+                    월간 결제
+                  </button>
+                  <button type="button" class="co-cycle-btn" id="btnCoAnnual" data-billing="annual" aria-pressed="false">
+                    연간 결제 <span class="co-save-tag">2개월 무료 (약 17% 절약)</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="co-plans">
+                <label class="co-plan" for="plan-plus">
+                  <input type="radio" name="plan" id="plan-plus" value="plus">
+                  <span class="co-plan__radio" aria-hidden="true"></span>
+                  <span class="co-plan__body">
+                    <span class="co-plan__name">Personalizer Plus</span>
+                    <span class="co-plan__cycle" id="coPlusCycle">기본 PC 제어와 간편 맞춤 설정</span>
+                  </span>
+                  <span class="co-plan__price"><b id="coPlusAmt">9,000</b>원<em id="coPlusPeriod">/ 월</em></span>
+                </label>
+                <label class="co-plan" for="plan-pro">
+                  <input type="radio" name="plan" id="plan-pro" value="pro">
+                  <span class="co-plan__radio" aria-hidden="true"></span>
+                  <span class="co-plan__body">
+                    <span class="co-plan__name">Personalizer Pro</span>
+                    <span class="co-plan__cycle" id="coProCycle">OpenClaw AI 프리셋 & 전문 커스텀</span>
+                  </span>
+                  <span class="co-plan__price"><b id="coProAmt">12,000</b>원<em id="coProPeriod">/ 월</em></span>
+                </label>
+              </div>
+              <p class="co-price-notice">추후 가격은 변동될 수 있습니다.</p>
+              <p class="co-hint" id="planHint">요금제를 하나 선택해 주세요.</p>
+            </fieldset>
+
+            <section class="co-step" aria-labelledby="method-title">
+              <h2 class="co-step__title" id="method-title"><span class="mono">02</span>결제 방법</h2>
+              <div class="co-method">
+                <div class="co-method__icon" aria-hidden="true">
+                  <svg viewBox="0 0 40 40">
+                    <rect x="9" y="17" width="22" height="16" rx="3" />
+                    <path d="M14 17v-4a6 6 0 0 1 12 0v4" />
+                    <circle cx="20" cy="25" r="2" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="co-method__t">검증된 결제 대행사의 보안 결제창에서 결제합니다.</p>
+                  <p class="co-method__d">이 사이트는 카드 번호나 비밀번호 같은 결제 정보를 직접 입력받거나 저장하지 않습니다. 결제 대행사는 연동이 확정되면 이곳에 안내됩니다.
+                  </p>
+                  <p class="co-method__status"><span class="badge badge--warn">결제 대행사 미연동</span></p>
+                </div>
+              </div>
+            </section>
+
+            <section class="co-step co-step--terms" aria-labelledby="terms-title">
+              <h2 class="co-step__title" id="terms-title"><span class="mono">03</span>확인 사항</h2>
+              <ul class="co-terms">
+                <li>요금제별 포함 기능, 자동 갱신 · 해지 · 환불 조건은 출시 전 확정해 안내합니다.</li>
+                <li>지원 스마트 링 목록은 기기별 연동 검증 후 공개됩니다.</li>
+                <li>이용약관 및 개인정보 처리방침은 준비 중입니다.</li>
+              </ul>
+            </section>
+          </form>
+        </div>
+
+        <!-- ================= RIGHT : order summary ================= -->
+        <aside class="co-summary" aria-labelledby="summary-title">
+          <div class="co-card">
+            <h2 class="co-card__title" id="summary-title">주문 요약</h2>
+            <dl class="co-lines" aria-live="polite">
+              <div>
+                <dt>제품</dt>
+                <dd>Personalizer</dd>
+              </div>
+              <div>
+                <dt>요금제</dt>
+                <dd id="sumPlan" class="is-empty">선택 전</dd>
+              </div>
+              <div>
+                <dt>결제 주기</dt>
+                <dd id="sumCycle" class="is-empty">—</dd>
+              </div>
+            </dl>
+            <div class="co-total">
+              <span>결제 예정 금액</span>
+              <output id="sumTotal" for="plan-plus plan-pro" class="is-empty">—</output>
+            </div>
+            <p class="co-total__note" id="sumNote">요금제를 선택하면 금액이 표시됩니다.</p>
+            <p class="co-price-notice co-price-notice--right">추후 가격은 변동될 수 있습니다.</p>
+
+            <button class="btn btn--primary btn--block co-pay" type="submit" form="coForm" id="payBtn" disabled
+              aria-describedby="payDesc">
+              <span id="payLabel">요금제를 선택하세요</span>
+            </button>
+            <button type="button" class="co-pay__desc co-scroll-prompt" id="payDesc" aria-label="설문조사 섹션으로 화면 이동">
+              <span class="co-scroll-prompt__glow" aria-hidden="true"></span>
+              <span class="co-scroll-prompt__text">조금만 창을 내려봐 주실래요?</span>
+              <span class="co-scroll-prompt__arrow" aria-hidden="true">↓</span>
+            </button>
+
+            <a class="co-change" href="../#pricing">요금제 비교로 돌아가기</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- ================= GOOGLE FORMS SURVEY SECTION ================= -->
+    <div class="wrap co-survey-wrap">
+      <!-- Google Forms Survey Section -->
+      <section class="co-survey" id="coSurvey" aria-labelledby="survey-title">
+        <div class="co-survey__card">
+          <div class="co-survey__header">
+            <div class="co-survey__icon" aria-hidden="true">
+              <!-- Minimalist Google Forms-inspired purple document icon -->
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="40" height="40" rx="10" fill="#1f1a2e" stroke="#3d3356" stroke-width="1.2"/>
+                <path d="M14 11H22L28 17V29C28 30.1046 27.1046 31 26 31H14C12.8954 31 12 30.1046 12 29V13C12 11.8954 12.8954 11 14 11Z" fill="#7248b9"/>
+                <path d="M22 11V17H28L22 11Z" fill="#a57ff5"/>
+                <line x1="16" y1="21" x2="24" y2="21" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"/>
+                <line x1="16" y1="25" x2="22" y2="25" stroke="#e0d4fc" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="co-survey__meta-row">
+                <span class="mono co-survey__badge">Feedback · 설문 참여</span>
+                <span class="co-survey__by">
+                  <span>BY</span>
+                  <img src="../assets/wordmark-3bit3board.png" alt="3BIT3BOARD" width="76" height="10">
+                </span>
+              </div>
+              <h2 class="co-survey__title" id="survey-title">설문조사 하기</h2>
+            </div>
+          </div>
+
+          <p class="co-survey__desc">Personalizer를 더 좋은 제품으로 만들기 위해 여러분의 의견을 들려주세요.</p>
+
+          <div class="co-survey__notice">
+            <span class="co-survey__notice-dot" aria-hidden="true"></span>
+            <span>Google Forms 공식 설문 링크로 안전하게 연결됩니다.</span>
+          </div>
+
+          <div class="co-survey__action">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScDKBqQfbhxk9b5M7-eANxmBFv4weJ2-WlJsUs0KMSc_Q266Q/viewform"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn btn--primary co-survey__btn"
+               id="btnSurveyLink">
+              <span>설문조사 바로가기 ↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Mobile sticky bar : always shows the selected plan & amount -->
+    <div class="co-bar" id="coBar" aria-hidden="true">
+      <div class="co-bar__info"><span id="barPlan">요금제 선택 전</span><b id="barTotal">—</b></div>
+      <button class="btn btn--primary co-bar__btn" type="button" id="barBtn" tabindex="-1" disabled>결제 진행</button>
+    </div>
+  </main>
+
+  <footer class="footer co-footer">
+    <div class="wrap">
+      <div class="footer__base">
+        <span>© <span data-year>2026</span> Personalizer. All rights reserved.</span>
+        <span class="footer__credit">SITE CRAFTED BY 민겸.</span>
+        <span>
+          <span class="is-pending" data-config-link="privacy" data-ready-class="" data-ready-html="개인정보 처리방침">개인정보 처리방침
+            (준비 중)</span>
+          ·
+          <span class="is-pending" data-config-link="terms" data-ready-class="" data-ready-html="이용약관">이용약관 (준비
+            중)</span>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/config.js" defer></script>
+  <script src="../js/site.js" defer></script>
+  <script src="../js/checkout.js" defer></script>
+</body>
+
+</html>
